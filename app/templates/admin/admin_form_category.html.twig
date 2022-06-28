@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    BackOffice | Nouvelle Catégorie
+{% endblock %}
+
+{% block body %}
+    <h1 class="display-4 text-center my-4">Nouvelle Catégorie</h1>
+    
+    {{ form_start(formCategory, {"attr": {"class": "col-md-6 mx-auto"}}) }}
+        {{ form_row(formCategory.title, {"label": "Titre de la catégorie"}) }}
+        {{ form_row(formCategory.description, {"attr": {"rows": 6}}) }}
+        <button type="submit" class="btn btn-secondary mt-3">Enregistrer la Catégorie</button>
+    {{ form_end(formCategory) }}
+{% endblock %}

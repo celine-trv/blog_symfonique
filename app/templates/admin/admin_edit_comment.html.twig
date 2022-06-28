@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    BackOffice | Modification d'un Commentaire
+{% endblock %}
+
+{% block body %}
+    <h1 class="display-4 text-center my-5">Modification d'un Commentaire</h1>
+    
+    {{ form_start(formComment, {"attr": {"class": "col-md-6 mx-auto"}}) }}
+        {{ form_row(formComment.author, {"label": "Auteur"}) }}
+        {{ form_row(formComment.content, {"label": "Commentaire"}) }}
+        <button type="submit" class="btn btn-secondary mt-3">Modifier le Commentaire</button>
+    {{ form_end(formComment) }}
+{% endblock %}

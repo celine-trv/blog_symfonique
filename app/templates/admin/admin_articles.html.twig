@@ -1,0 +1,44 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    BackOffice | Gestion des Articles
+{% endblock %}
+
+{% block body %}
+    <h1 class="display-4 text-center my-5">Gestion des Articles</h1>
+
+    {% for message in app.flashes("success") %}
+        <div class="col-md-5 bg-success rounded p-3 my-3 mx-auto text-center text-white">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <table class="table table-bordered table-striped text-center">
+        <tr class="align-middle" style="background-color: #e3f2fd;">
+            {% for column in columns %}
+                {% if column == "createdAt" %}
+                    <th class="align-middle">DATE</th>
+                {% else %}
+                    <th class="align-middle">{{column|upper}}</th>
+                {% endif %}
+            {% endfor %}
+                    <th class="align-middle">CATEGORIE</th>
+                    <th class="align-middle">COMMENTAIRES</th>
+        </tr>
+
+        {% for article in articles %}
+            <tr class="align-middle">
+                <td class="align-middle">{{article.id}}</td>
+                <td class="align-middle">{{article.title}}</td>
+                <td class="align-middle">{{article.content|striptags|slice(0,200)}}...</td>
+                <td class="align-middle"><img src="{{article.image}}" alt="{{article.title}}" width="250px" height="150px"></td>
+                <td class="align-middle">Le {{article.createdAT|date("d/m/Y à H:i:s")}}</td>
+                <td class="align-middle">{{article.category.title}}</td>
+                <td class="align-middle">{{article.comments|length}}</td>
+
+                <td class="align-middle"><a href="{{path("admin_edit_article", {"id": article.id})}}" class="btn btn-secondary"><i class="far fa-edit"></i></a></td>
+                <td class="align-middle"><a href="{{path("admin_remove_article", {"id": article.id})}}" class="btn btn-danger" onclick="return(confirm('Voulez-vous vraiment supprimer cet article ?'))"><i class="far fa-trash-alt"></i></a></td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

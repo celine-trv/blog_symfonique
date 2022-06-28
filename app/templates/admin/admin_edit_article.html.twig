@@ -1,0 +1,17 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    BackOffice | Modification d'un Article
+{% endblock %}
+
+{% block body %}
+    <h1 class="display-4 text-center my-4">Modification Article <span class="text-info">{{idArticle}}</span></h1>
+
+    {{ form_start(formArticle, {"attr": {"class": "col-md-6 mx-auto"}}) }}
+        {{ form_row(formArticle.title, {"label": "Titre de l'article"}) }}
+        {{ form_row(formArticle.category, {"label": "Catégorie"}) }}
+        {{ form_row(formArticle.content, {"label": "Contenu de l'article", "attr": {"rows": 6}}) }}
+        {{ form_row(formArticle.image) }}
+        <button type="submit" class="btn btn-secondary mt-3">Modifier l'Article</button>
+    {{ form_end(formArticle) }}
+{% endblock %}

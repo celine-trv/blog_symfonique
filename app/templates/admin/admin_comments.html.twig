@@ -1,0 +1,43 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    BackOffice | Gestion des Commentaires
+{% endblock %}
+
+{% block body %}
+    <h1 class="display-4 text-center my-5">Gestion des Commentaires</h1>
+
+    {% for message in app.flashes("success") %}
+        <div class="col-md-8 bg-success rounded p-3 my-3 mx-auto text-center text-white">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <table class="table table-bordered table-striped text-center">
+        <tr class="align-middle" style="background-color: #e3f2fd;">
+            {% for column in columns %}
+                {% if column == "createdAt" %}
+                    <th class="align-middle">DATE</th>
+                {% elseif column == "author" %}
+                    <th class="align-middle">AUTEUR</th>
+                {% else %}
+                    <th class="align-middle">{{column|upper}}</th>
+                {% endif %}
+            {% endfor %}
+                    <th class="align-middle">TITRE ARTICLE</th>
+        </tr>
+
+        {% for comment in comments %}
+            <tr class="align-middle">
+                <td class="align-middle">{{comment.id}}</td>
+                <td class="align-middle">{{comment.author}}</td>
+                <td class="align-middle">{{comment.content|striptags}}</td>
+                <td class="align-middle">Le {{comment.createdAT|date("d/m/Y à H:i:s")}}</td>
+                <td class="align-middle">{{comment.article.title}}</td>
+
+                <td class="align-middle"><a href="{{path("admin_edit_comment", {"id": comment.id})}}" class="btn btn-secondary"><i class="far fa-edit"></i></a></td>
+                <td class="align-middle"><a href="{{path("admin_remove_comment", {"id": comment.id})}}" class="btn btn-danger" onclick="return(confirm('Voulez-vous vraiment supprimer ce commentaire ?'))"><i class="far fa-trash-alt"></i></a></td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

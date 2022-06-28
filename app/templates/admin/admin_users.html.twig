@@ -1,0 +1,43 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    BackOffice | Gestion des Membres
+{% endblock %}
+
+{% block body %}
+    <h1 class="display-4 text-center my-5">Gestion des Membres</h1>
+
+    {% for message in app.flashes("success") %}
+        <div class="col-md-7 bg-success rounded p-3 my-3 mx-auto text-center text-white">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <table class="table table-bordered table-striped text-center">
+        <tr class="align-middle" style="background-color: #e3f2fd;">
+            {% for column in columns %}
+                {% if column == "username" %}
+                    <th class="align-middle">NOM D'UTILISATEUR</th>
+                {% elseif column != "password" %}       {# on exclut la colonne password qu'on ne doit pas afficher dans le backoffice #}
+                    <th class="align-middle">{{column|upper}}</th>
+                {% endif %}
+            {% endfor %}
+        </tr>
+
+        {% for user in users %}
+            <tr class="align-middle">
+                <td class="align-middle">{{user.id}}</td>
+                <td class="align-middle">{{user.email}}</td>
+                <td class="align-middle">{{user.username}}</td>
+            {% if user.roles[0] == "ROLE_ADMIN" %}
+                <td class="align-middle text-info font-weight-bold">Administrateur</td>
+            {% else %}
+                <td class="align-middle">Utilisateur</td>
+            {% endif %}
+
+                <td class="align-middle"><a href="{{path("admin_edit_user", {"id": user.id})}}" class="btn btn-secondary"><i class="far fa-edit"></i></a></td>
+                <td class="align-middle"><a href="{{path("admin_remove_user", {"id": user.id})}}" class="btn btn-danger" onclick="return(confirm('Voulez-vous vraiment supprimer ce membre ?'))"><i class="far fa-trash-alt"></i></a></td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

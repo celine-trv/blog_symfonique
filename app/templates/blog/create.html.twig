@@ -1,0 +1,32 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Création d'un nouvel article
+{% endblock %}
+
+
+{% block body %}
+    <h1 class="display-4 text-center my-4">
+        {% if editMode %}
+            Modification de l'article n° {{ editMode }}
+        {% else %}
+            Création d'un nouvel article
+        {% endif %}
+    </h1>
+
+    {{ form_start(formArticle, {"attr": {"class": "col-md-6 mx-auto"} }) }}
+        {{ form_row(formArticle.title, {"attr": {"placeholder": "Saisir le titre de l'article", "maxlength": false, "pattern": false}, "label": "Titre de l'article" }) }}
+        {{ form_row(formArticle.category, {"label": "Choisir une catégorie"}) }}
+        {{ form_row(formArticle.content, {"attr": {"placeholder": "Contenu de l'article", "rows": 3}, "label": "Contenu de l'article" }) }}
+        {{ form_row(formArticle.image, {"attr": {"placeholder": "Saisir l'URL de l'image"}, "label": "URL de l'image" }) }}
+
+        <button type="submit" class="btn btn-secondary mt-3">
+            {% if editMode %}
+                Enregistrer les modifications
+            {% else %}
+                Enregistrer l'article
+            {% endif %}
+        </button>
+    {{ form_end(formArticle) }}
+
+{% endblock %}

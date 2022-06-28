@@ -1,0 +1,16 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    BackOffice | Modification Membre
+{% endblock %}
+
+{% block body %}
+    <h1 class="display-4 text-center my-5">Modification Membre</h1>
+    
+    {{ form_start(formUser, {"attr": {"class": "col-md-6 mx-auto"}}) }}
+        {{ form_row(formUser.username, {"label": "Nom d'utilisateur"}) }}
+        {{ form_row(formUser.email) }}
+        {{ form_row(formUser.roles, {"label": false}) }}
+        <button type="submit" class="btn btn-secondary mt-3">Modifier Membre</button>
+    {{ form_end(formUser) }}
+{% endblock %}

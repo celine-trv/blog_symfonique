@@ -1,0 +1,43 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    BackOffice | Gestion des Catégories
+{% endblock %}
+
+{% block body %}
+    <h1 class="display-4 text-center my-4">
+        Gestion des Catégories <br>
+        <small><a href="{{path("admin_new_category")}}" class="btn btn-secondary my-3">Nouvelle catégorie</a></small>
+    </h1>
+
+    {% for label, messages in app.flashes(["danger", "success"]) %}
+
+        {% for message in messages %}
+            <div class="col-md-6 bg-{{label}} rounded p-3 my-3 mx-auto text-center text-white">
+                {{ message }}
+            </div>
+        {% endfor %}
+        
+    {% endfor %}
+
+    <table class="table table-bordered table-striped text-center">
+        <tr class="align-middle" style="background-color: #e3f2fd;">
+            {% for column in columns %}
+                <th class="align-middle">{{column|upper}}</th>
+            {% endfor %}
+                <th>NB ARTICLES</th>
+        </tr>
+
+        {% for category in categories %}
+            <tr class="align-middle">
+                <td class="align-middle">{{category.id}}</td>
+                <td class="align-middle">{{category.title}}</td>
+                <td class="align-middle">{{category.description}}</td>
+                <td class="align-middle">{{category.articles|length}}</td>
+
+                <td class="align-middle"><a href="{{path("admin_edit_category", {"id": category.id})}}" class="btn btn-secondary"><i class="far fa-edit"></i></a></td>
+                <td class="align-middle"><a href="{{path("admin_remove_category", {"id": category.id})}}" class="btn btn-danger" onclick="return(confirm('Voulez-vous vraiment supprimer cette catégorie ?'))"><i class="far fa-trash-alt"></i></a></td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

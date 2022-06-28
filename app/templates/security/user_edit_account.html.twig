@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Modification de mes informations
+{% endblock %}
+
+{% block body %}
+    <h1 class="display-4 text-center mt-4 mb-5">Modification de mes informations</h1>
+    
+    {{ form_start(formUser, {"attr": {"class": "col-md-6 mx-auto"}}) }}
+        {{ form_row(formUser.username, {"label": "Nom d'utilisateur"}) }}
+        {{ form_row(formUser.email) }}
+        <button type="submit" class="btn btn-secondary mt-3">Modifier mes informations</button>
+    {{ form_end(formUser) }}
+{% endblock %}

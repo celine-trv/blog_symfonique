@@ -1,0 +1,35 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Mon Compte
+{% endblock %}
+
+{% block body %}
+    <h1 class="display-4 text-center mt-4 mb-5">Mon Compte</h1>
+
+    {% for message in app.flashes("success") %}
+        <div class="col-md-4 bg-success rounded p-3 my-3 mx-auto text-center text-white">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <div class="card col-md-5 mx-auto p-0 shadow-lg mb-3">
+        <img src="uploads\img\guitar-2119_1920.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title text-center">Informations personnelles</h5><hr>
+                <p class="card-text d-flex justify-content-between">
+                    <strong>Nom d'utilisateur</strong>
+                    <span>{{app.user.username}}</span>
+                </p>
+
+                <p class="card-text d-flex justify-content-between">
+                    <strong>Email</strong>
+                    <span>{{app.user.email}}</span>
+                </p>
+            <br>
+                <p class="card-text text-center">
+                    <a href="{{path("edit_user")}}" class="btn btn-secondary">Modifier</a>
+                </p>
+        </div>
+    </div>
+{% endblock %}
